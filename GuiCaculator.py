@@ -37,7 +37,7 @@ def giaiAction():
     try:
         kq=eval(stringInOut.get())
     except:
-        kq="Không thể chia cho 0"
+        kq="Math error"
     stringInOut.set(kq)
 root=Tk()
 
