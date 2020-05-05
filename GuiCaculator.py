@@ -1,5 +1,6 @@
 from tkinter import *
 from CenterLib import makecenter
+from math import *
 def clrAction():
     stringInOut.set("")
 def inAction1():
@@ -32,10 +33,22 @@ def inActionNhan():
     stringInOut.set(stringInOut.get()+"*")
 def inActionChia():
     stringInOut.set(stringInOut.get()+"/")
+def inActionCan():
+    stringInOut.set(stringInOut.get()+"sqrt")
+def inActionNgoacMo():
+    stringInOut.set(stringInOut.get()+"(")
+def inActionNgoacDong():
+    stringInOut.set(stringInOut.get()+")")
+def inActionMu():
+    stringInOut.set(stringInOut.get()+"pow")
+def inActionAC():
+    oldStr = stringInOut.get()
+    newStr = oldStr[:-1] #Remove final character from string
+    stringInOut.set(newStr)
 def giaiAction():
     kq=""
     try:
-        kq=eval(stringInOut.get())
+        kq=eval(stringInOut.get(),{'sqrt': sqrt, 'pow': pow})
     except:
         kq="Math error"
     stringInOut.set(kq)
@@ -44,11 +57,9 @@ root=Tk()
 stringInOut=StringVar("")
 
 root.title("Caculator")
-root.minsize(height=270,width=180)
+root.minsize(height=320,width=180)
 root.resizable(height=False,width=False)
 Entry(root,width=29,textvariable=stringInOut).grid(row=0)
-
-
 
 
 frameButton1=Frame(root)
@@ -70,22 +81,27 @@ Button(frameButton3,text="9",font=("tahoma",16),width=4,command=inAction9).pack(
 frameButton3.grid(row=3,columnspan=3)
 
 frameButton4=Frame(root)
-Button(frameButton4,text="-",font=("tahoma",16),width=4,command=inActionTru).pack(side=LEFT)
+Button(frameButton4,text="sqrt",font=("tahoma",16),width=4,command=inActionCan).pack(side=LEFT)
 Button(frameButton4,text="0",font=("tahoma",16),width=4,command=inAction0).pack(side=LEFT)
 Button(frameButton4,text=".",font=("tahoma",16),width=4,command=inActionCham).pack(side=LEFT)
 frameButton4.grid(row=4,columnspan=3)
 
+
 frameButton5=Frame(root)
-Button(frameButton5,text="+",font=("tahoma",16),width=2,command=inActionCong).pack(side=LEFT)
-Button(frameButton5,text="-",font=("tahoma",16),width=2,command=inActionTru).pack(side=LEFT)
-Button(frameButton5,text="*",font=("tahoma",16),width=2,command=inActionNhan).pack(side=LEFT)
-Button(frameButton5,text="/",font=("tahoma",16),width=2,command=inActionChia).pack(side=LEFT)
-Button(frameButton5,text="=",font=("tahoma",16),width=2,padx=3, command=giaiAction).pack(side=LEFT)
-
-
+Button(frameButton5,text="(",font=("tahoma",16),width=4,command=inActionNgoacMo).pack(side=LEFT)
+Button(frameButton5,text=")",font=("tahoma",16),width=4,command=inActionNgoacDong).pack(side=LEFT)
+Button(frameButton5,text="AC",font=("tahoma",16),width=4,command=inActionAC).pack(side=LEFT)
 frameButton5.grid(row=5,columnspan=3)
 
-button=Button(root,text="clr",font=("tahoma",16),width=14, command=clrAction).grid(row=6)
+frameButton6=Frame(root)
+Button(frameButton6,text="+",font=("tahoma",16),width=2,command=inActionCong).pack(side=LEFT)
+Button(frameButton6,text="-",font=("tahoma",16),width=2,command=inActionTru).pack(side=LEFT)
+Button(frameButton6,text="*",font=("tahoma",16),width=2,command=inActionNhan).pack(side=LEFT)
+Button(frameButton6,text="/",font=("tahoma",16),width=2,command=inActionChia).pack(side=LEFT)
+Button(frameButton6,text="=",font=("tahoma",16),width=2,padx=3, command=giaiAction).pack(side=LEFT)
+frameButton6.grid(row=6,columnspan=3)
+
+button=Button(root,text="clr",font=("tahoma",16),width=12, command=clrAction).grid(row=7)
 
 makecenter(root)
 root.mainloop()
