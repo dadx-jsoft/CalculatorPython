@@ -4,7 +4,7 @@ from math import *
 def clrAction():
     stringInOut.set("")
 def inAction1():
-    stringInOut.set(stringInOut.get() + "1")
+    stringInOut.set(stringInOut.get()+"1")
 def inAction2():
     stringInOut.set(stringInOut.get()+"2")
 def inAction3():
@@ -43,7 +43,12 @@ def inActionMu():
     stringInOut.set(stringInOut.get()+"pow")
 def inActionAC():
     oldStr = stringInOut.get()
-    newStr = oldStr[:-1] #Remove final character from string
+    if(oldStr[-1]=="t"): # for sqrt
+        newStr = oldStr[:-4]
+    elif (oldStr[-1]=="r"): # for Math error
+        newStr = oldStr[:-10]
+    else:
+        newStr = oldStr[:-1] #Remove final character from string
     stringInOut.set(newStr)
 def giaiAction():
     kq=""
